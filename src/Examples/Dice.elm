@@ -24,14 +24,12 @@ type alias Die =
   , size : Int
   }
 
-type alias Model =
-  { die : Die
-  }
+type alias Model = Die
 
 
 init : () -> (Model, Cmd Msg)
 init _ =
-  ( Model (Die 1 0 0 120)
+  ( Die 1 0 0 120
   , Cmd.none
   )
 
@@ -40,9 +38,6 @@ type Msg
   = Roll
   | NewFace Int
 
-updateDie : Int -> Die -> Die
-updateDie val die =
-  { die | face = val }
 
 update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
@@ -53,13 +48,13 @@ update msg model =
     )
 
   NewFace newFace ->
-    ( { model | die = (updateDie newFace model.die) }
+    ( { model | face = newFace }
     , Cmd.none
     )
 
 
 subscriptions : Model -> Sub Msg
-subscriptions model =
+subscriptions _ =
   Sub.none
 
 drawCircle : Int -> Int -> Int -> Svg msg
@@ -79,40 +74,40 @@ drawCircles size n =
   in
     case n of
     1 ->
-      [ (drawCircle c2 c2 10)
+      [ drawCircle c2 c2 10
       ]
     2 ->
-      [ (drawCircle c1 c1 10)
-      , (drawCircle c3 c3 10)
+      [ drawCircle c1 c1 10
+      , drawCircle c3 c3 10
       ]
     3 ->
-      [ (drawCircle c1 c1 10)
-      , (drawCircle c2 c2 10)
-      , (drawCircle c3 c3 10)
+      [ drawCircle c1 c1 10
+      , drawCircle c2 c2 10
+      , drawCircle c3 c3 10
       ]
     4 ->
-      [ (drawCircle c1 c1 10)
-      , (drawCircle c1 c3 10)
-      , (drawCircle c3 c1 10)
-      , (drawCircle c3 c3 10)
+      [ drawCircle c1 c1 10
+      , drawCircle c1 c3 10
+      , drawCircle c3 c1 10
+      , drawCircle c3 c3 10
       ]
     5 ->
-      [ (drawCircle c1 c1 10)
-      , (drawCircle c1 c3 10)
-      , (drawCircle c2 c2 10)
-      , (drawCircle c3 c1 10)
-      , (drawCircle c3 c3 10)
+      [ drawCircle c1 c1 10
+      , drawCircle c1 c3 10
+      , drawCircle c2 c2 10
+      , drawCircle c3 c1 10
+      , drawCircle c3 c3 10
       ]
     6 ->
-      [ (drawCircle c1 c1 10)
-      , (drawCircle c1 c2 10)
-      , (drawCircle c1 c3 10)
-      , (drawCircle c3 c1 10)
-      , (drawCircle c3 c2 10)
-      , (drawCircle c3 c3 10)
+      [ drawCircle c1 c1 10
+      , drawCircle c1 c2 10
+      , drawCircle c1 c3 10
+      , drawCircle c3 c1 10
+      , drawCircle c3 c2 10
+      , drawCircle c3 c3 10
       ]
     _ ->
-      [ (drawCircle 0 0 0)
+      [ drawCircle 0 0 0
       ]
 
 
@@ -132,6 +127,6 @@ drawDice die =
 view : Model -> Html Msg
 view model =
   div []
-  [ drawDice model.die
+  [ drawDice model
   , div [] [button [ onClick Roll ] [ Html.text "Roll" ]]
   ]
