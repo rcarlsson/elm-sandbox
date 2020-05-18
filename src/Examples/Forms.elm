@@ -1,11 +1,12 @@
-module Examples.Forms exposing (..)
+module Examples.Forms exposing (main)
 
 import Browser
-import Html exposing (..)
-import Html.Attributes exposing (..)
+import Html exposing (Html, div, text, input)
+import Html.Attributes exposing (style, type_, placeholder, value)
 import Html.Events exposing (onInput)
 
 
+main : Program () Model Msg
 main =
   Browser.sandbox { init = init, update = update, view = view }
 

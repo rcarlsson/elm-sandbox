@@ -1,39 +1,35 @@
-module Examples.TextFields exposing (..)
+module Examples.TextFields exposing (main)
 
 import Browser
-import Html exposing (Html, Attribute, div, input, text)
-import Html.Attributes exposing (..)
+import Html exposing (Html, div, input, text)
+import Html.Attributes exposing (placeholder, value)
 import Html.Events exposing (onInput)
 
 
+main : Program () String Msg
 main =
   Browser.sandbox { init = init, update = update, view = view }
 
 
-type alias Model =
-  { content : String
-  }
-
-
-init : Model
+init : String
 init =
-  { content = "" }
+  ""
 
 
 type Msg =
   Change String
 
-update : Msg -> Model -> Model
-update msg model =
+update : Msg -> String -> String
+update msg _ =
   case msg of
     Change newContent ->
-      { model | content = newContent }
+      newContent
 
 
-view : Model -> Html Msg
-view model =
+view : String -> Html Msg
+view content =
   div []
-    [ input [ placeholder "Text to reverse", value model.content, onInput Change ] []
-    , div [] [ text (String.reverse model.content) ]
-    , div [] [ text (String.fromInt (String.length model.content)) ]
+    [ input [ placeholder "Text to reverse", value content, onInput Change ] []
+    , div [] [ text (String.reverse content) ]
+    , div [] [ text (String.fromInt (String.length content)) ]
     ]
