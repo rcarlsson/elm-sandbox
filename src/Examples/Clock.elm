@@ -1,11 +1,12 @@
-module Examples.Clock exposing (..)
+module Examples.Clock exposing (main)
 
 import Browser
-import Html exposing (..)
+import Html exposing (Html, h1, text)
 import Task
 import Time
 
 
+main : Program () Model Msg
 main =
   Browser.element
     { init = init
@@ -49,7 +50,7 @@ update msg model =
 
 
 subscriptions : Model -> Sub Msg
-subscriptions model =
+subscriptions _ =
   Time.every 1000 Tick
 
 

@@ -1,13 +1,14 @@
-module Examples.Dice exposing (..)
+module Examples.Dice exposing (main)
 
 import Browser
-import Html exposing (..)
-import Html.Events exposing (..)
+import Html exposing (Html, div, button)
+import Html.Events exposing (onClick)
 import Random
-import Svg exposing (..)
-import Svg.Attributes exposing (..)
+import Svg exposing (Svg, svg, circle)
+import Svg.Attributes exposing (width, height, viewBox, cx, cy, r)
 
 
+main : Program () Model Msg
 main =
   Browser.element
   { init = init

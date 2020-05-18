@@ -1,4 +1,4 @@
-module Examples.Http exposing (..)
+module Examples.Http exposing (main)
 
 import Browser
 import Html exposing (Html, button, text, pre)
@@ -6,6 +6,7 @@ import Html.Events exposing (onClick)
 import Http
 
 
+main : Program () Model Msg
 main =
   Browser.element
     { init = init
@@ -35,7 +36,7 @@ type Msg
 
 
 update : Msg -> Model -> (Model, Cmd Msg)
-update msg model =
+update msg _ =
   case msg of
     GetText ->
       ( Loading
@@ -55,7 +56,7 @@ update msg model =
 
 
 subscriptions : Model -> Sub Msg
-subscriptions model =
+subscriptions _ =
   Sub.none
 
 
